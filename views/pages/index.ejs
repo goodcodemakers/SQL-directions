@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <a href="/">home</a> |
+        <a href="/about">about</a>
+      </nav>
+      <h1>홈페이지</h1>
+      <ul class="post-list">
+        총 게시물 수 <%= posts.length %> <% for(let i = 0; i < posts.length;
+        i++) { %>
+        <li>
+          <div class="mt-20">
+            작성일 <%= posts[i].createdAt.toLocaleString() %>
+            <h3>id:<%= i + 1%> <%= posts[i].post %></h3>
+            <p><%= posts[i].memo %></p>
+          </div>
+          <form
+            action="/delete/<%= posts[i].id %> "
+            method="post"
+            onsubmit="let result = confirm('삭제하시겠습니까?');if(!result) return false;"
+          >
+            <button type="submit">삭제</button>
+          </form>
+        </li>
+        <% } %>
+      </ul>
+      <form action="/create" method="post">
+        <input type="text" name="post" placeholder="글 제목" />
+        <textarea
+          name="memo"
+          id="memo"
+          cols="20"
+          rows="5"
+          placeholder="글입력"
+        ></textarea>
+        <button type="submit">글쓰기</button>
+      </form>
+    </div>
+    <!-- container -->
+  </body>
+</html>
